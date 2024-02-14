@@ -1,2 +1,3 @@
-package pruebas;public interface Contracts {
+package pruebas;
+public interface Contracts {
 }

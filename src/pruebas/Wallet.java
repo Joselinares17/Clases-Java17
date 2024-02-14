@@ -8,13 +8,22 @@ public class Wallet {
     private BigDecimal assetFound;
     private BigDecimal liquidFound;
     private Integer countAssets;
-    private List<Assets> assetsList;
+    private List<Asset> assetList;
 
-    public Wallet(BigDecimal totalFound, List<Assets> assetsList) {
-        this.totalFound = totalFound;
+    public Wallet() {
         this.assetFound = BigDecimal.valueOf(0);
         this.liquidFound = BigDecimal.valueOf(0);
-        this.assetsList = assetsList;
+    }
+
+    public Wallet(BigDecimal totalFound, List<Asset> assetList) {
+        this();
+        this.totalFound = totalFound;
+        this.assetList = assetList;
+    }
+
+    public Wallet(BigDecimal totalFound) {
+        this();
+        this.totalFound = totalFound;
     }
 
     public BigDecimal getTotalFound() {
@@ -26,8 +35,8 @@ public class Wallet {
     }
 
     public BigDecimal getAssetFound() {
-        return assetsList.stream()
-                .map(Assets::getPriceAsset)
+        return assetList.stream()
+                .map(Asset::getPriceAsset)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
@@ -44,19 +53,19 @@ public class Wallet {
     }
 
     public Integer getCountAssets() {
-        return this.assetsList.size();
+        return this.assetList.size();
     }
 
     public void setCountAssets(Integer countAssets) {
         this.countAssets = countAssets;
     }
 
-    public List<Assets> getAssetsList() {
-        return assetsList;
+    public List<Asset> getAssetsList() {
+        return assetList;
     }
 
-    public void setAssetsList(List<Assets> assetsList) {
-        this.assetsList = assetsList;
+    public void setAssetsList(List<Asset> assetList) {
+        this.assetList = assetList;
     }
 
     @Override

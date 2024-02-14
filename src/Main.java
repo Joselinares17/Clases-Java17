@@ -7,22 +7,45 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Main {
-    public static void printPriceAsset(User user) {
-        user.getAssetsList()
+    public static void printPriceAsset(Wallet wallet) {
+        wallet.getAssetsList()
                 .stream()
-                .map(Assets::getPriceAsset)
+                .map(Asset::getPriceAsset)
                 .forEach(System.out::println);
     }
 
-    public static void applyTaxList(User user) {
-        user.getAssetsList()
+    public static void applyTaxList(Wallet wallet) {
+        wallet.getAssetsList()
                 .stream()
-                .peek(assets -> assets.setPriceAsset(BigDecimal.valueOf(1.25).multiply(assets.getPriceAsset())))
+                .peek(asset -> asset.setPriceAsset(BigDecimal.valueOf(1.25).multiply(asset.getPriceAsset())))
                 .collect(Collectors.toList());
     }
 
     public static void main(String[] args) {
-        List<Assets> assetsList0 = Arrays.asList(
+        Enterprice enterprice0 = new Enterprice("Apple", "Electronic devices", TypeEnterprice.TECH, BigDecimal.valueOf(150));
+
+        List<Asset> assetList = Arrays.asList(
+                new Asset(1L, enterprice0.getName(), enterprice0.getValuePerAsset()),
+                new Asset(2L, enterprice0.getName(), enterprice0.getValuePerAsset()),
+                new Asset(3L, enterprice0.getName(), enterprice0.getValuePerAsset()),
+                new Asset(4L, enterprice0.getName(), enterprice0.getValuePerAsset()),
+                new Asset(5L, enterprice0.getName(), enterprice0.getValuePerAsset())
+        );
+        enterprice0.setAssetsList(assetList);
+
+        Wallet wallet0 = new Wallet(BigDecimal.valueOf(10000), assetList);
+
+        User user0 = new User("José", "Linares", LocalDateTime.now(), wallet0);
+
+        System.out.println("Datos enterprice " + enterprice0);
+        System.out.println("------------------------------------");
+        System.out.println("Datos wallet " + wallet0);
+        System.out.println("------------------------------------");
+        System.out.println("Datos usuario " + user0);
+    }
+
+    /*
+    List<Assets> assetsList0 = Arrays.asList(
                 new Assets("Apple", BigDecimal.valueOf(125), LocalDateTime.of(2018,8,20,12,50)),
                 new Assets("AMD", BigDecimal.valueOf(245), LocalDateTime.of(2020, 1, 1, 9, 30)),
                 new Assets("Intel", BigDecimal.valueOf(150), LocalDateTime.of(2019, 5, 15, 18, 45)),
@@ -37,14 +60,5 @@ public class Main {
                 new Assets("Qualcomm", BigDecimal.valueOf(120), LocalDateTime.of(2021, 11, 20, 9, 0)),
                 new Assets("Alibaba", BigDecimal.valueOf(250), LocalDateTime.of(2022, 5, 3, 14, 20))
         );
-
-        Wallet wallet1 = new Wallet(BigDecimal.valueOf(10000), assetsList0);
-
-        User user = new User("Jose","Linares", LocalDateTime.now(), wallet1, assetsList0);
-
-        System.out.println("--------------------------");
-        printPriceAsset(user);
-        System.out.println("--------------------------");
-        System.out.println(user);;
-    }
+    */
 }

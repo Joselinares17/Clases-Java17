@@ -2,26 +2,22 @@ package pruebas;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
 
 public class User {
     private String name;
     private String lastName;
     private LocalDateTime accountCreatedDate;
-    private Wallet walletFound;
-    private List<Assets> assetsList;
+    private Wallet wallet;
     private BigDecimal valueAssets;
 
     public User() {
     }
 
-    public User(String name, String lastName, LocalDateTime accountCreatedDate, Wallet walletFound, List<Assets> assetsList) {
+    public User(String name, String lastName, LocalDateTime accountCreatedDate, Wallet wallet) {
         this.name = name;
         this.lastName = lastName;
         this.accountCreatedDate = accountCreatedDate;
-        this.walletFound = walletFound;
-        this.assetsList = assetsList;
+        this.wallet = wallet;
     }
 
     public String getName() {
@@ -48,20 +44,12 @@ public class User {
         this.accountCreatedDate = accountCreatedDate;
     }
 
-    public Wallet getWalletFound() {
-        return walletFound;
+    public Wallet getWallet() {
+        return wallet;
     }
 
-    public void setWalletFound(Wallet walletFound) {
-        this.walletFound = walletFound;
-    }
-
-    public List<Assets> getAssetsList() {
-        return assetsList;
-    }
-
-    public void setAssetsList(List<Assets> assetsList) {
-        this.assetsList = assetsList;
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 
     public BigDecimal getValueAssets() {
@@ -74,10 +62,9 @@ public class User {
 
     @Override
     public String toString() {
-        return "Name: " + getName() +
+        return "\nName: " + getName() +
                 "\nLastname: " + getLastName() +
                 "\nCreated date: " + getAccountCreatedDate() +
-                "\nWallet: " + getWalletFound() +
-                "\nAssets: " + getAssetsList();
+                "\nWallet: " + getWallet();
     }
 }
