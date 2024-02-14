@@ -2,6 +2,7 @@ package pruebas;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,19 +25,31 @@ public class Main {
     public static void main(String[] args) {
         Enterprice enterprice0 = new Enterprice("Apple", "Electronic devices", TypeEnterprice.TECH, BigDecimal.valueOf(150));
 
-        List<Asset> assetList = Arrays.asList(
+        List<Asset> assetList = new ArrayList<>(Arrays.asList(
                 new Asset(1L, enterprice0.getName(), enterprice0.getValuePerAsset()),
                 new Asset(2L, enterprice0.getName(), enterprice0.getValuePerAsset()),
                 new Asset(3L, enterprice0.getName(), enterprice0.getValuePerAsset()),
                 new Asset(4L, enterprice0.getName(), enterprice0.getValuePerAsset()),
                 new Asset(5L, enterprice0.getName(), enterprice0.getValuePerAsset())
-        );
+        ));
         enterprice0.setAssetsList(assetList);
 
-        Wallet wallet0 = new Wallet(BigDecimal.valueOf(10000), assetList);
+        List<Asset> assetListCopy = new ArrayList<>();
+
+        Wallet wallet0 = new Wallet(BigDecimal.valueOf(10000), assetListCopy);
 
         User user0 = new User("José", "Linares", LocalDateTime.now(), wallet0);
 
+        System.out.println("Datos enterprice " + enterprice0);
+        System.out.println("------------------------------------");
+        System.out.println("Datos wallet " + wallet0);
+        System.out.println("------------------------------------");
+        System.out.println("Datos usuario " + user0);
+
+        user0.buyAsset(enterprice0.sellAssetById(1L));
+        user0.buyAsset(enterprice0.sellAssetById(2L));
+
+        System.out.println("---------------new object---------------------");
         System.out.println("Datos enterprice " + enterprice0);
         System.out.println("------------------------------------");
         System.out.println("Datos wallet " + wallet0);

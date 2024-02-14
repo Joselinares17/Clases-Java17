@@ -96,15 +96,23 @@ public class Enterprice {
         return this.valuePerAsset.multiply(BigDecimal.valueOf(getQuanAssetOffered()));
     }
 
-    public void sellAsset() {
+    public Asset sellAsset() {
         Random rand = new Random();
-        this.assetList.remove(rand.nextInt(5));
+        Asset tempAsset = this.assetList.get(rand.nextInt(this.assetList.size()));
+        this.assetList.remove(rand.nextInt(this.assetList.size()));
         this.quanAssetOffered--;
+        return tempAsset;
     }
 
-    public void sellAssetById(Long id) {
-        this.assetList.remove(id.intValue());
+    public Asset sellAssetById(Long id) {
+        //Asset tempAsset = this.assetList.get(id.intValue());
+        Asset tempAsset = this.assetList.stream()
+                .filter(asset -> asset.getId().equals(id))
+                .findFirst()
+                .orElseThrow();
+        this.assetList.remove(tempAsset);
         this.quanAssetOffered--;
+        return tempAsset;
     }
 
     @Override
@@ -113,6 +121,7 @@ public class Enterprice {
                 "\ndescription: " + description +
                 "\ntypeEnterprice: " + typeEnterprice +
                 "\ncantAssetsOffered: " + getQuanAssetOffered() +
-                "\nmarketValue: " + getMarketValue();
+                "\nmarketValue: " + getMarketValue() +
+                "\nassetList: " + assetList;
     }
 }

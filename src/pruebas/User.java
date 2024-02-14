@@ -60,6 +60,10 @@ public class User {
         this.valueAssets = valueAssets;
     }
 
+    public void buyAsset(Asset asset) {
+        this.wallet.getAssetsList().add(asset);
+    }
+
     @Override
     public String toString() {
         return "\nName: " + getName() +

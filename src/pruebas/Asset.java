@@ -40,8 +40,6 @@ public class Asset {
         this.priceAsset = priceAsset;
     }
 
-
-
     @Override
     public String toString() {
         return  "\n{id: " + getId() + ", " +
